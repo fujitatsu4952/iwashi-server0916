@@ -1,0 +1,15 @@
+overwrite: true
+schema:
+    - './schema/**/*.graphql'
+documents: null
+generates:
+    ./entity/type.ts:
+        plugins:
+            - 'typescript'
+            - 'typescript-resolvers'
+        config:
+            skipTypename: true
+
+    ./entity/schema.graphql:
+        plugins:
+            - 'schema-ast'

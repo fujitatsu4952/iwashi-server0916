@@ -1,0 +1,29 @@
+type ReservationObject {
+  reservationID: String!
+  checkInTime: String!
+  checkOutTime: String!
+  roomNum: Int!
+  planNum: Int!
+  peopleNum: Int!
+  totalPrice: Int!
+  guestName: String!
+  guestEmail: String!
+  GuestTell: String!
+  canceledAt: String
+  policyID: String!
+}
+
+input ReservationObjectInput {
+  reservationID: String!
+  checkInTime: String!
+  checkOutTime: String!
+  roomNum: Int!
+  planNum: Int!
+  peopleNum: Int!
+  totalPrice: Int!
+  guestName: String!
+  guestEmail: String!
+  GuestTell: String!
+  canceledAt: String
+  policyID: String!
+}
