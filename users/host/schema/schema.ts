@@ -218,6 +218,5 @@ input RoomStatusInput {
   isAvailabe: Boolean
 }
 
-
      `);
 export default schema;
