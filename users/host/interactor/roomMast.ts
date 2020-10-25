@@ -1,4 +1,4 @@
-import { RoomMast } from '../../../entity/type';
+import { RoomMast } from 'iwashi_abr_1023/iwashiabr';
 
 const connection = require('../../../database.js');
 let tableName = 'RoomMast';

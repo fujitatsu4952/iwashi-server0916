@@ -4,19 +4,25 @@
     "main": "index.js",
     "license": "MIT",
     "dependencies": {
+        "@types/aws-lambda": "^8.10.63",
+        "aws-lambda": "^1.0.6",
+        "aws-sdk": "^2.768.0",
         "body-parser": "^1.19.0",
         "cors": "^2.8.5",
         "d": "^1.0.1",
         "express": "^4.17.1",
         "express-graphql": "^0.11.0",
         "graphql": "^15.3.0",
+        "iwashi_abr_1023": "git+ssh://git@github.com:fujitatsu4952/iwashi_abr_1023.git",
         "mysql": "^2.18.1",
         "nodemon": "^2.0.4",
+        "serverless-webpack": "^5.3.5",
         "ts-node": "^9.0.0"
     },
     "scripts": {
         "start": "nodemon ./main.ts",
-        "codegen": "graphql-codegen --config codegen.yml"
+        "codegen": "graphql-codegen --config codegen.yml",
+        "abr": "yarn add git+ssh://git@github.com:fujitatsu4952/iwashi_abr_1023.git"
     },
     "devDependencies": {
         "@graphql-codegen/cli": "1.17.8",
@@ -30,6 +36,9 @@
         "@types/node": "^12.12.62",
         "babel-plugin-module-resolver": "^4.0.0",
         "babel-root-import": "^4.1.8",
-        "typescript": "^4.0.3"
+        "ts-loader": "^8.0.4",
+        "typescript": "^4.0.3",
+        "webpack": "^4.44.2",
+        "webpack-node-externals": "^2.5.2"
     }
 }

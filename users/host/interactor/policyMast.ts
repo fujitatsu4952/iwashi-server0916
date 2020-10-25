@@ -1,4 +1,4 @@
-import { PolicyMast } from '../../../entity/type';
+import { PolicyMast } from 'iwashi_abr_1023/iwashiabr';
 
 const connection = require('../../../database.js');
 let tableName = 'PolicyMast';
