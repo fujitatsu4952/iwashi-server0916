@@ -5,7 +5,6 @@ let tableName = 'RoomMast';
 
 const roomRoot = {
     fetchRoomMasts: (path: any) => {
-        console.log(path);
         return new Promise(async (resolve) => {
             let conditions = `SELECT * FROM ${tableName}`;
             const filter = Object.keys(path);
@@ -25,7 +24,6 @@ const roomRoot = {
     },
     updateRoomMast: (path: any) => {
         const mast: RoomMast = path.input;
-        console.log(path);
         let conditions = `
         UPDATE ${tableName} SET 
         name= '${mast.name}', description= '${mast.description}', subDescription= '${mast.subDescription}',

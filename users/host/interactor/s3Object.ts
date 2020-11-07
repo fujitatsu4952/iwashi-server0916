@@ -6,7 +6,6 @@ let tableName = 'S3Object';
 
 const s3Root = {
         fetchS3Objects: (path: any) => {
-            console.log(path);
             return new Promise(async (resolve) => {
                 let conditions = `SELECT * FROM ${tableName}`;
                 const filter = Object.keys(path);
@@ -25,7 +24,6 @@ const s3Root = {
             });
         },
         updateS3Object: (path: any) => {
-            console.log(path);
             let conditions = `
             UPDATE ${tableName} SET 
             bucket= '${path.input.bucket}', region= '${path.input.region}',
@@ -37,7 +35,6 @@ const s3Root = {
         },
         addS3Object: (path: any) => {
             const mast: S3Object = path.input
-            console.log('add', mast);
     
             let conditions = `INSERT INTO ${tableName} (keyName, bucket, region, mimeType, fileName) VALUES ('${mast.keyName}', '${mast.bucket}', '${mast.region}', '${mast.mimeType}', '${mast.fileName}')`;
     
