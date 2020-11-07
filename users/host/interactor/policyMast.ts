@@ -1,6 +1,6 @@
 import { PolicyMast } from 'iwashi_abr_1023/iwashiabr';
 
-const connection = require('../../../database.js');
+import { connection } from '../../../database'
 let tableName = 'PolicyMast';
 
 const policyRoot = {

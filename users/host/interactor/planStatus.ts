@@ -1,4 +1,4 @@
-const connection = require('../../../database.js');
+import { connection } from '../../../database'
 let tableName = 'PlanStatus';
 import { PlanStatus } from 'iwashi_abr_1023/iwashiabr';
 

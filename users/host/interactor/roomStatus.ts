@@ -1,4 +1,4 @@
-const connection = require('../../../database.js');
+import { connection } from '../../../database'
 let tableName = 'RoomStatus';
 import { RoomStatus } from 'iwashi_abr_1023/iwashiabr';
 
@@ -17,7 +17,7 @@ const roomStatusRoot = {
                 conditions,
                 (err: any, results: any, fields: any) => {
                     resolve(JSON.parse(JSON.stringify(results)));
-                },
+                },       
             );
         });
     },
