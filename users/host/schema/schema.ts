@@ -1,23 +1,84 @@
 // データ型を指定
 const { buildSchema } = require('graphql');
-import { Scalars } from '../../../entity/type';
+import { Scalars } from 'iwashi_abr_1023/iwashiabr';
 // import temp from '../../../schema/repository/CancelPolicyMast.graphql';
 // console.log(temp);
 // フィールド名: 返却データ型
 const schema = buildSchema(`
+type DateStatusObject {
+  date: AWSDate!
+  isStayable: Boolean!
+  price: PriceObject
+}
+
+input DateStatusObjectInput {
+  date: AWSDate!
+  isStayable: Boolean!
+  price: PriceObjectInput
+}
+
+type KeyValueObject {
+  key: String!
+  value: String
+  description: String
+}
+
+type PriceObject {
+  currencyType: CurrencyType!
+  amount: Int!
+}
+
+input PriceObjectInput {
+  currencyType: CurrencyType!
+  amount: Int!
+}
+
+enum CurrencyType {
+  jpy
+  usd
+}
+
+enum DayOfTheWeek {
+  SUN
+  MON
+  TUE
+  WED
+  THU
+  FRI
+  SAT
+}
+
+enum TimeZone {
+  Asia__Tokyo
+  America__New_York
+  Europe__London
+}
+
 type Query {
   fetchPlanMasts(planID: ID): [PlanMast!]!
+  fetchPlanStatus(Time: String, planID: ID): [PlanStatus!]!
   fetchPolicyMast(policyID: ID): [PolicyMast!]!
+  fetchReservationObjects(reservationID: ID): [ReservationObject!]!
   fetchRoomMasts(roomID: ID): [RoomMast!]!
+  fetchRoomStatus(Time: String, roomID: ID): [RoomStatus!]!
+  fetchS3Objects(keyName: String): [S3Object!]!
 }
 
 type Mutation {
   addPlanMast(input: PlanMastInput): PlanMast
+  addPlanStatus(input: [PlanStatusInput]): PlanStatus
   addPolicyMast(input: PolicyMastInput): PolicyMast
+  addReservationObject(input: ReservationObjectInput): ReservationObject
   addRoomMast(input: RoomMastInput): RoomMast
+  addRoomStatus(input: [RoomStatusInput]): RoomStatus
+  addS3Object(input: S3ObjectInput): S3Object
   updatePlanMast(input: PlanMastInput): PlanMast
+  updatePlanStatus(input: [PlanStatusInput]): PlanStatus
   updatePolicyMast(input: PolicyMastInput): PolicyMast
+  updateReservationObject(input: ReservationObjectInput): ReservationObject
   updateRoomMast(input: RoomMastInput): RoomMast
+  updateRoomStatus(input: [RoomStatusInput]): RoomStatus
+  updateS3Object(input: S3ObjectInput): S3Object
 }
 
 type CancelPolicyMast {
@@ -107,33 +168,37 @@ input PolicyMastInput {
 }
 
 type ReservationObject {
-  reservationID: String!
+  reservationID: ID!
   checkInTime: String!
   checkOutTime: String!
-  roomNum: Int!
-  planNum: Int!
+  planID: ID!
+  roomID: ID!
+  roomNum: Int
+  planNum: Int
   peopleNum: Int!
-  totalPrice: Int!
-  guestName: String!
-  guestEmail: String!
-  GuestTell: String!
+  policyID: ID!
+  totalPrice: Int
+  guestName: String
+  guestEmail: String
+  GuestTell: String
   canceledAt: String
-  policyID: String!
 }
 
 input ReservationObjectInput {
-  reservationID: String!
+  reservationID: ID!
   checkInTime: String!
   checkOutTime: String!
-  roomNum: Int!
-  planNum: Int!
+  planID: ID!
+  roomID: ID!
+  roomNum: Int
+  planNum: Int
   peopleNum: Int!
-  totalPrice: Int!
-  guestName: String!
-  guestEmail: String!
-  GuestTell: String!
+  policyID: ID!
+  totalPrice: Int
+  guestName: String
+  guestEmail: String
+  GuestTell: String
   canceledAt: String
-  policyID: String!
 }
 
 type ReservationPlanInfo {
@@ -218,6 +283,38 @@ input RoomStatusInput {
   isAvailabe: Boolean
 }
 
+type S3Object {
+  bucket: String
+  keyName: String!
+  region: String!
+  mimeType: String
+  fileName: String
+}
 
+input S3ObjectInput {
+  bucket: String
+  keyName: String!
+  region: String!
+  mimeType: String
+  fileName: String
+}
+
+scalar AWSDate
+
+scalar AWSDateTime
+
+scalar AWSTimestamp
+
+scalar AWSTime
+
+scalar AWSEmail
+
+scalar AWSJSON
+
+scalar AWSURL
+
+scalar AWSPhone
+
+scalar AWSIPAddress
      `);
 export default schema;

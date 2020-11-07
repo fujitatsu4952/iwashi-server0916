@@ -3,7 +3,6 @@ let tableName = 'PlanMast';
 
 const planRoot = {
     fetchPlanMasts: (path: any) => {
-        console.log(path);
         return new Promise(async (resolve) => {
             let conditions = `SELECT * FROM ${tableName}`;
             const filter = Object.keys(path);
@@ -22,7 +21,6 @@ const planRoot = {
         });
     },
     updatePlanMast: (path: any) => {
-        console.log(path);
         let conditions = `
         UPDATE PlanMast SET 
         name= '${path.input.name}', description= '${path.input.description}', subDescription= '${path.input.subDescription}',
@@ -33,7 +31,6 @@ const planRoot = {
         });
     },
     addPlanMast: (path: any) => {
-        console.log('add', path);
 
         let conditions = `
                 INSERT INTO PlanMast

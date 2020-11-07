@@ -1,12 +1,10 @@
-import { PolicyMast } from '../../../entity/type';
+import { PolicyMast } from 'iwashi_abr_1023/iwashiabr';
 
 const connection = require('../../../database.js');
 let tableName = 'PolicyMast';
 
 const policyRoot = {
     fetchPolicyMast: (path: any) => {
-        console.log('in');
-        console.log(path);
         return new Promise(async (resolve) => {
             let conditions = `SELECT * FROM ${tableName}`;
             const filter = Object.keys(path);
@@ -26,7 +24,6 @@ const policyRoot = {
     },
     updatePolicyMast: (path: any) => {
         const mast: PolicyMast = path.input;
-        console.log(path);
         let conditions = `
         UPDATE ${tableName} SET 
         roomChargePrice= '${mast.roomChargePrice}'   

@@ -1,0 +1,130 @@
+###############################################################
+#                                                             #
+#            画像Storage用S3の設定とバケットポリシー               #
+#                                                             #
+###############################################################
+## 画像や、htmlのアップロード先のS3
+Resources:
+    HostS3Bucket:
+        Type: AWS::S3::Bucket
+        ## 一応残す
+        DeletionPolicy: Retain
+        Properties:
+            BucketName: iwashimidnight1011
+            AccessControl: PublicReadWrite
+            CorsConfiguration:
+                CorsRules:
+                    - AllowedOrigins:
+                          - '*'
+                      AllowedHeaders:
+                          - '*'
+                      AllowedMethods:
+                          - GET
+                          - PUT
+                          - POST
+                          - DELETE
+                          - HEAD
+                      MaxAge: 3000
+    ## Bucket
+    HostS3BucketPolicy:
+        Type: AWS::S3::BucketPolicy
+        Properties:
+            Bucket:
+                Ref: HostS3Bucket
+            PolicyDocument:
+                Statement:
+                    - Sid: PublicReadGetObject
+                      Effect: Allow
+                      Principal:
+                          AWS: '*'
+                      Action:
+                          - 's3:GetObject'
+                      Resource:
+                          - 'arn:aws:s3:::iwashimidnight1011/public/*'
+                          - 'arn:aws:s3:::iwashimidnight1011/admin/*'
+                          - 'arn:aws:s3:::iwashimidnight1011/master/v1/*'
+
+    ## Cloud Front
+    HostCloudFrontDistribution:
+        Type: AWS::CloudFront::Distribution
+        Properties:
+            DistributionConfig:
+                # Aliases:
+                CacheBehaviors:
+                    - AllowedMethods:
+                          - HEAD
+                          - GET
+                          - OPTIONS
+                      CachedMethods:
+                          - HEAD
+                          - GET
+                          - OPTIONS
+                      Compress: true
+                      DefaultTTL: 86400 # 24時間
+                      # FieldLevelEncryptionId : String,
+                      ForwardedValues:
+                          Headers:
+                              - Origin
+                          QueryString: true
+                      # LambdaFunctionAssociations:
+                      #   - LambdaFunctionAssociation
+                      # MaxTTL: 1200
+                      # MinTTL: 600
+                      PathPattern: public/**
+                      # SmoothStreaming: Boolean
+                      TargetOriginId: ${self:provider.stage}_HOST_S3Origin
+                      # TrustedSigners:
+                      #   - 文字列
+                      ViewerProtocolPolicy: https-only
+                # Comment: 画像配信用
+                # CustomErrorResponses:
+                DefaultCacheBehavior:
+                    AllowedMethods:
+                        - HEAD
+                        - GET
+                        - OPTIONS
+                    CachedMethods:
+                        - HEAD
+                        - GET
+                        - OPTIONS
+                    Compress: true
+                    DefaultTTL: 86400 # 24時間
+                    # FieldLevelEncryptionId: String,
+                    ForwardedValues:
+                        Headers:
+                            - Origin
+                        QueryString: true
+                    # LambdaFunctionAssociations:
+                    #   - LambdaFunctionAssociation
+                    # MaxTTL: 1200
+                    # MinTTL: 600
+                    # SmoothStreaming: Boolean
+                    TargetOriginId: ${self:provider.stage}_HOST_S3Origin
+                    # TrustedSigners:
+                    #   - 文字列
+                    ViewerProtocolPolicy: https-only
+                Enabled: true
+                # HttpVersion:
+                # IPV6Enabled:
+                # Logging:
+                Origins:
+                    - DomainName: { Fn::GetAtt: [HostS3Bucket, DomainName] }
+                      Id: ${self:provider.stage}_HOST_S3Origin
+                      S3OriginConfig:
+                          OriginAccessIdentity: { Fn::Join: ['/', [origin-access-identity/cloudfront, { Ref: HostCloudFrontOriginAccessIdentity }]] }
+                PriceClass: PriceClass_100
+            Tags:
+                - Key: 'CONTENT'
+                  Value: 'IMAGE HTML'
+    HostCloudFrontOriginAccessIdentity:
+        Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
+        Properties:
+            CloudFrontOriginAccessIdentityConfig:
+                Comment: { Ref: AWS::StackName }
+# Print out the name of the bucket that is created
+Outputs:
+    HostS3Bucket:
+        Value:
+            Ref: HostS3Bucket
+    StaticContentsCloudFrontUrl:
+        Value: { Fn::Join: ['', ['https://', { Fn::GetAtt: [HostCloudFrontDistribution, DomainName] }]] }

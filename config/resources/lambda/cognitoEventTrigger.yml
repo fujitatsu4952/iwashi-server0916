@@ -1,0 +1,12 @@
+hostCognitoEventTrigger:
+    handler: src/functions/controller/cognito/hostCognito.controller
+    name: ${self:provider.stage}-host-cognito-controller
+    # environment: ${self:custom.environment.dev}
+    description: HOST Cognito Event Trigger Controller
+    memorySize: 256
+    timeout: 30
+    role: { Fn::GetAtt: [CognitoCustomMessageLambdaRole, Arn] }
+    events:
+        - cognitoUserPool:
+              pool: CognitoUserPool
+              trigger: CustomMessage
