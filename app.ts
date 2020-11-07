@@ -13,4 +13,4 @@ var corsOptions = {
 };
 app.use(cors(corsOptions));
 
-export { app };
+export default app ;

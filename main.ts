@@ -1,6 +1,6 @@
-import { app } from './app';
 import rootFunc from './users/host/interactor/index';
 import schema from './users/host/schema/schema';
+import app from './app';
 
 const { graphqlHTTP } = require('express-graphql');
 
@@ -14,6 +14,6 @@ app.use(
     }),
 );
 
-app.listen(8080, () => {
+app.listen(8081, () => {
     console.log('Now browse to localhost:8080/graphql');
 });
