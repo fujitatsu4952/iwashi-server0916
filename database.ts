@@ -1,7 +1,7 @@
 // const mysql = require('mysql');
-import {createConnection} from 'mysql'
+import mysql from 'mysql'
 // データベースの接続
-const connection = createConnection({
+const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '',
