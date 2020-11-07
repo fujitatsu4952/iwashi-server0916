@@ -14,6 +14,6 @@ app.use(
     }),
 );
 
-app.listen(8081, () => {
+app.listen(8080, () => {
     console.log('Now browse to localhost:8080/graphql');
 });
