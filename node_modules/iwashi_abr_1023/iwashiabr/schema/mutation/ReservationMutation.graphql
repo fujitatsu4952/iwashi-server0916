@@ -1,0 +1,39 @@
+type Query {
+  fetchReservationObjects(reservationID: ID): [ReservationObject!]!
+}
+
+type Mutation {
+  updateReservationObject(input: ReservationObjectInput): ReservationObject
+  addReservationObject(input: ReservationObjectInput): ReservationObject
+}
+
+mutation updateReservationObject($reservationObject: ReservationObjectInput) {
+  updateReservationObject(input: $reservationObject) {
+    reservationID
+  }
+}
+
+mutation addReservationObject($reservationObject: ReservationObjectInput) {
+  addReservationObject(input: $reservationObject) {
+    reservationID
+  }
+}
+
+query fetchReservationObjects($reservationID: ID) {
+  fetchReservationObjects(reservationID: $reservationID) {
+    reservationID
+    checkInTime
+    checkOutTime
+    planID
+    roomID
+    roomNum
+    planNum
+    peopleNum
+    policyID
+    totalPrice
+    guestName
+    guestEmail
+    GuestTell
+    canceledAt
+  }
+}

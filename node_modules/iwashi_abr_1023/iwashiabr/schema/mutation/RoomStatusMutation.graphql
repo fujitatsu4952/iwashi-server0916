@@ -1,0 +1,38 @@
+type Query {
+  fetchRoomStatus(Time: String, roomID: ID): [RoomStatus!]!
+}
+
+type Mutation {
+  updateRoomStatus(input: [RoomStatusInput]): RoomStatus
+  addRoomStatus(input: [RoomStatusInput]): RoomStatus
+}
+
+mutation updateRoomStatus($roomStatus: [RoomStatusInput!]) {
+  updateRoomStatus(input: $roomStatus) {
+    roomID
+    Time
+    soldNum
+    availableNum
+    isAvailabe
+  }
+}
+
+mutation addRoomStatus($roomStatus: [RoomStatusInput!]) {
+  addRoomStatus(input: $roomStatus) {
+    roomID
+    Time
+    soldNum
+    availableNum
+    isAvailabe
+  }
+}
+
+query fetchRoomStatus($Time: String!, $roomID: ID!) {
+  fetchRoomStatus(Time: $Time, roomID: $roomID) {
+    roomID
+    Time
+    soldNum
+    availableNum
+    isAvailabe
+  }
+}

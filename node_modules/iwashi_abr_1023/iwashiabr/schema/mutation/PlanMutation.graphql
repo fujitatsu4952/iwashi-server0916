@@ -1,0 +1,40 @@
+type Query {
+    fetchPlanMasts(planID: ID): [PlanMast!]!
+}
+
+type Mutation {
+    updatePlanMast(input: PlanMastInput): PlanMast
+    addPlanMast(input: PlanMastInput): PlanMast
+}
+
+mutation updatePlanMast($planMast: PlanMastInput) {
+    updatePlanMast(input: $planMast) {
+        name
+    }
+}
+
+mutation addPlanMast($planMast: PlanMastInput) {
+    addPlanMast(input: $planMast) {
+        planID
+        name
+        description
+        subDescription
+        price
+        stockNum
+        deletedAt
+        inSale
+    }
+}
+
+query fetchPlanMasts($planID: ID) {
+    fetchPlanMasts(planID: $planID) {
+        planID
+        name
+        description
+        subDescription
+        price
+        stockNum
+        deletedAt
+        inSale
+    }
+}

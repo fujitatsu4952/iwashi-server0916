@@ -1,0 +1,27 @@
+type Query {
+    fetchPolicyMast(policyID: ID): [PolicyMast!]!
+}
+
+type Mutation {
+    updatePolicyMast(input: PolicyMastInput): PolicyMast
+    addPolicyMast(input: PolicyMastInput): PolicyMast
+}
+
+mutation updatePolicyMast($policyMast: PolicyMastInput) {
+    updatePolicyMast(input: $policyMast) {
+        policyID
+    }
+}
+
+mutation addPolicyMast($policyMast: PolicyMastInput) {
+    addPolicyMast(input: $policyMast) {
+        policyID
+    }
+}
+
+query fetchPolicyMast($policyID: ID) {
+    fetchPolicyMast(policyID: $policyID) {
+        policyID
+        roomChargePrice
+    }
+}

@@ -1,0 +1,9 @@
+type PriceObject {
+    currencyType: CurrencyType!
+    amount: Int!
+}
+
+input PriceObjectInput {
+    currencyType: CurrencyType!
+    amount: Int!
+}

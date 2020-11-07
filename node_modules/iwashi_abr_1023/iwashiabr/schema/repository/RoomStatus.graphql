@@ -1,0 +1,15 @@
+type RoomStatus {
+  roomID: ID!
+  Time: String!
+  soldNum: Int
+  availableNum: Int
+  isAvailabe: Boolean
+}
+
+input RoomStatusInput {
+  roomID: ID!
+  Time: String!
+  soldNum: Int
+  availableNum: Int
+  isAvailabe: Boolean
+}

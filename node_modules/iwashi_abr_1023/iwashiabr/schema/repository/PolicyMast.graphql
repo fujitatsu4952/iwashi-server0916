@@ -1,0 +1,9 @@
+type PolicyMast {
+    policyID: ID!
+    roomChargePrice: Int
+}
+
+input PolicyMastInput {
+    policyID: ID!
+    roomChargePrice: Int
+}

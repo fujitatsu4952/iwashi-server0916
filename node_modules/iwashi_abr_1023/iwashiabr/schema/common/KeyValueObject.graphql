@@ -1,0 +1,5 @@
+type KeyValueObject {
+  key: String!
+  value: String
+  description: String
+}

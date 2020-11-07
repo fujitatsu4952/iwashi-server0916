@@ -1,0 +1,38 @@
+type Query {
+  fetchPlanStatus(Time: String, planID: ID): [PlanStatus!]!
+}
+
+type Mutation {
+  updatePlanStatus(input: [PlanStatusInput]): PlanStatus
+  addPlanStatus(input: [PlanStatusInput]): PlanStatus
+}
+
+mutation updatePlanStatus($planStatus: [PlanStatusInput!]) {
+  updatePlanStatus(input: $planStatus) {
+    planID
+    Time
+    soldNum
+    availableNum
+    isAvailabe
+  }
+}
+
+mutation addPlanStatus($planStatus: [PlanStatusInput!]) {
+  addPlanStatus(input: $planStatus) {
+    planID
+    Time
+    soldNum
+    availableNum
+    isAvailabe
+  }
+}
+
+query fetchPlanStatus($Time: String!, $planID: ID!) {
+  fetchPlanStatus(Time: $Time, planID: $planID) {
+    planID
+    Time
+    soldNum
+    availableNum
+    isAvailabe
+  }
+}

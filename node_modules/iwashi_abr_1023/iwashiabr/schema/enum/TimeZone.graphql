@@ -1,0 +1,5 @@
+enum TimeZone {
+  Asia__Tokyo
+  America__New_York
+  Europe__London
+}
