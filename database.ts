@@ -8,4 +8,4 @@ const connection = createConnection({
   database: 'iwashi0920',
 });
 
-export {connection};
+export default connection;

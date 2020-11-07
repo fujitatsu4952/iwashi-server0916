@@ -1,6 +1,5 @@
-// import { connection } from '../../../database'
-import { connection } from '../../../database'
 let tableName = 'PlanMast';
+import connection from "../../../database"
 
 const planRoot = {
     fetchPlanMasts: (path: any) => {

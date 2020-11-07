@@ -1,4 +1,4 @@
-import { connection } from '../../../database'
+import connection from "../../../database"
 let tableName = 'PlanStatus';
 import { PlanStatus } from 'iwashi_abr_1023/iwashiabr';
 

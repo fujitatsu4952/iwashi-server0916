@@ -1,7 +1,7 @@
 import { S3Object } from 'iwashi_abr_1023/iwashiabr';
 
 
-import { connection } from '../../../database'
+import connection from "../../../database"
 let tableName = 'S3Object';
 
 const s3Root = {

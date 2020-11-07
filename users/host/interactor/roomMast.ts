@@ -1,6 +1,6 @@
 import { RoomMast } from 'iwashi_abr_1023/iwashiabr';
 
-import { connection } from '../../../database'
+import connection from "../../../database"
 let tableName = 'RoomMast';
 
 const roomRoot = {
