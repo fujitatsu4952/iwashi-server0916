@@ -1,5 +1,5 @@
-// const mysql = require('mysql');
-import mysql from 'mysql'
+const mysql = require('mysql');
+// import mysql from 'mysql'
 // データベースの接続
 const connection = mysql.createConnection({
   host: 'localhost',
