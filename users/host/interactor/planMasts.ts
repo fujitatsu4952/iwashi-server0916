@@ -1,4 +1,5 @@
-const connection = require('../../../database.js');
+// import { connection } from '../../../database'
+import { connection } from '../../../database'
 let tableName = 'PlanMast';
 
 const planRoot = {
