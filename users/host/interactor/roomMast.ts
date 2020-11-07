@@ -22,6 +22,7 @@ const roomRoot = {
             );
         });
     },
+    
     updateRoomMast: (path: any) => {
         const mast: RoomMast = path.input;
         let conditions = `
