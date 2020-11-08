@@ -1,0 +1,28 @@
+Resources:
+    CognitoUserIdentityPool:
+        Type: AWS::Cognito::IdentityPool
+        Properties:
+            IdentityPoolName: ${self:custom.stage}CognitoUserIdentityPoolTF
+            # Don't allow unathenticated users
+            AllowUnauthenticatedIdentities: true
+            CognitoIdentityProviders:
+                - ClientId:
+                      Ref: CognitoUserPoolClient
+                  ProviderName:
+                      Fn::GetAtt: ['CognitoUserPool', 'ProviderName']
+
+    CognitoUserIdentityPoolRoleAttachment:
+        Type: AWS::Cognito::IdentityPoolRoleAttachment
+        Properties:
+            IdentityPoolId:
+                Ref: CognitoUserIdentityPool
+            Roles:
+                authenticated:
+                    Fn::GetAtt: [CognitoUserAuthRole, Arn]
+
+Outputs:
+    CognitoUserIdentityPool:
+        Value:
+            Ref: CognitoUserIdentityPool
+        Export:
+            Name: ${self:custom.stage}-CognitoUserIdentityPool

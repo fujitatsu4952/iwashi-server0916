@@ -1,0 +1,52 @@
+Resources:
+    # Lambdaの実行権限
+    CognitoCustomMessageLambdaRole:
+        Type: 'AWS::IAM::Role'
+        Properties:
+            RoleName: '${self:custom.stage}-chillnn-lambda-cognito-event-trigger-controller'
+            AssumeRolePolicyDocument:
+                Version: '2012-10-17'
+                Statement:
+                    - Effect: 'Allow'
+                      Principal:
+                          Service:
+                              - 'lambda.amazonaws.com'
+                      Action:
+                          - 'sts:AssumeRole'
+            Policies:
+                - ## VPCの設定
+                  PolicyName: '${self:custom.stage}-chillnn-lambda-cognito-event-trigger-controller-vpc-policy'
+                  PolicyDocument:
+                      Version: '2012-10-17'
+                      Statement:
+                          - Effect: 'Allow'
+                            Action:
+                                # VPC関係
+                                - ec2:CreateNetworkInterface
+                                - ec2:DescribeNetworkInterfaces
+                                - ec2:DeleteNetworkInterface
+                            Resource:
+                                - '*'
+                # - ## ログの設定
+                #   PolicyName: '${self:custom.stage}-chillnn-lambda-cognito-event-trigger-controller-log-policy'
+                #   PolicyDocument:
+                #       Version: '2012-10-17'
+                #       Statement:
+                #           - Action:
+                #                 - logs:CreateLogStream
+                #             Resource:
+                #                 - 'arn:aws:logs:${self:custom.stage}.REGION}:#{AWS::AccountId}:log-group:/aws/lambda/*:*'
+                #             Effect: Allow
+                #           - Action:
+                #                 - logs:PutLogEvents
+                #             Resource:
+                #                 - 'arn:aws:logs:${self:custom.stage}.REGION}:#{AWS::AccountId}:log-group:/aws/lambda/*:*:*'
+                #             Effect: Allow
+    # Cognitoの実行権限(あとで復活させよう)
+    CognitoCustomMessageLambdaPermission:
+        Type: AWS::Lambda::Permission
+        Properties:
+            Action: lambda:InvokeFunction
+            FunctionName: ${self:custom.stage}-host-cognito-controller
+            Principal: cognito-idp.amazonaws.com
+            SourceArn: !GetAtt CognitoUserPool.Arn
