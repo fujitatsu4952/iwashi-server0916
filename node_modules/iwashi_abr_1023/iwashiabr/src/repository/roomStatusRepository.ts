@@ -2,7 +2,7 @@ import { RoomStatus } from "../index";
 import { request, GraphQLClient, gql } from "graphql-request";
 import { getSdk } from "./mutations";
 
-const graphqlClient = new GraphQLClient(`http://18.180.113.27:8080`);
+const graphqlClient = new GraphQLClient(`https://18.180.113.27:8080`);
 const sdk = getSdk(graphqlClient);
 
 export class roomStatusRepository {
