@@ -1,0 +1,9 @@
+type PlanImageMappingTemplate {
+  planID: String!
+  imageID: String
+}
+
+input PlanImageMappingTemplateInput {
+  planID: String!
+  imageID: String
+}

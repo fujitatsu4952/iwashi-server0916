@@ -1,0 +1,15 @@
+type ReservationPlanInfo {
+  reservationID: String!
+  planID: String!
+  name: String!
+  amount: String!
+  price: String!
+}
+
+input ReservationPlanInfoInput {
+  reservationID: String!
+  planID: String!
+  name: String!
+  amount: String!
+  price: String!
+}

@@ -1,0 +1,11 @@
+type DateStatusObject {
+  date: AWSDate!
+  isStayable: Boolean!
+  price: PriceObject
+}
+
+input DateStatusObjectInput {
+  date: AWSDate!
+  isStayable: Boolean!
+  price: PriceObjectInput
+}
